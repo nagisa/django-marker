@@ -22,27 +22,31 @@ def markdown(what, **kwargs):
     Syntax::
 
         {% markdown text %}
-        {% markdown text extras="code-friendly,fenced-code-blocks" %}
-        {% markdown text safe_mode="escape" %} or safe_mode="replace"
+        {% markdown text ext="fenced-code,autolink" %}
+        {% markdown text html="escape" %}
 
+    Possible arguments and values::
 
-    Extras can also be enabled globally by adding variable in settings.py.
+        ext="no-intra-emphasis,tables,fenced-code,autolink,strikethrough,
+             lax-html-blocks,space-headers,superscript"
+        html="skip-html,skip-style,skip-images,skip-links,safelink,toc,
+              hard-wrap,use-xhtml,escape,smartypants,toc-tree"
+
+    You can find what each option does at http://misaka.61924.nl/api/#toc_0.
+
+    Extensions and HTML flags can also be enabled globally by adding variable
+    in settings.py.
     """
     try:
-        import markdown2
+       import misaka
     except ImportError:
         if MARKER['fatal_import']:
-            raise template.TemplateSyntaxError('Could not import markdown2.')
+            raise ImportError('Could not import misaka.')
         return what
 
-    extras = MARKER['markdown']['global_extras'] + \
-                                            kwargs.get('extras', '').split(',')
+    exts = MARKER['markdown']['global_ext'] + kwargs.get('ext', '').split(',')
+    html = MARKER['markdown']['global_html'] + kwargs.get('html', '').split(',')
 
-    md = markdown2.Markdown(safe_mode=kwargs.get('safe_mode', False),
-                            extras=set(extras),
-                            link_patterns=MARKER['markdown']['link_patterns'])
-    # Safe mode. Possible values are escape and replace. You can set replacement
-    # in global settings.
-    md.html_removed_text = MARKER['markdown']['html_replace']
+    return misaka.html(what, extensions=exts, render_flags=html)
 
-    return md.convert(what)
+
