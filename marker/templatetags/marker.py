@@ -22,7 +22,7 @@ def markdown(what, **kwargs):
     Syntax::
 
         {% markdown text %}
-        {% markdown text ext="fenced-code,autolink" %}
+        {% markdown text exts="fenced-code,autolink" %}
         {% markdown text html="escape" %}
 
     Possible arguments and values::
@@ -44,9 +44,22 @@ def markdown(what, **kwargs):
             raise ImportError('Could not import misaka.')
         return what
 
-    exts = MARKER['markdown']['global_ext'] + kwargs.get('ext', '').split(',')
+    def get_flag(strs, prefix):
+        flag = 0
+        for string in strs:
+            if string.strip() == '':
+                continue
+            var = "{0}_{1}".format(prefix, string.replace('-', '_').upper())
+            if hasattr(misaka, var):
+                flag |= getattr(misaka, var)
+            else:
+                raise ValueError, 'Could not find {0} in misaka'.format(string)
+        return flag
+
+    exts = MARKER['markdown']['global_exts'] + kwargs.get('exts', '').split(',')
     html = MARKER['markdown']['global_html'] + kwargs.get('html', '').split(',')
 
-    return misaka.html(what, extensions=exts, render_flags=html)
+    return misaka.html(what, extensions=get_flag(set(exts), 'EXT'),
+                       render_flags=get_flag(set(html), 'HTML'))
 
 
