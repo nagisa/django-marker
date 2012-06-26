@@ -2,8 +2,8 @@
 Set of "markup" template filters for Django.  These filters transform plain text
 markup syntaxes to HTML; currently there is support for:
 
-    * Markdown, which requires the markdown2 library available at
-      https://github.com/trentm/python-markdown
+    * Markdown, which requires the misaka library available at PyPI.
+      Project page is at http://misaka.61924.nl/.
 """
 from django import template
 
@@ -14,21 +14,13 @@ register = template.Library()
 @register.simple_tag
 def markdown(what, **kwargs):
     """
-    Parses given value with markdown, optionally using extras documented at
-    https://github.com/trentm/python-markdown2/wiki/Extras.
+    Parses given value with markdown, optionally using some extensions.
 
     Syntax::
 
         {% markdown text %}
         {% markdown text exts="fenced-code,autolink" %}
         {% markdown text html="escape" %}
-
-    Possible arguments and values::
-
-        ext="no-intra-emphasis,tables,fenced-code,autolink,strikethrough,
-             lax-html-blocks,space-headers,superscript"
-        html="skip-html,skip-style,skip-images,skip-links,safelink,toc,
-              hard-wrap,use-xhtml,escape,smartypants,toc-tree"
 
     You can find what each option does at http://misaka.61924.nl/api/#toc_0.
 
@@ -59,5 +51,3 @@ def markdown(what, **kwargs):
 
     return misaka.html(what, extensions=get_flag(set(exts), 'EXT'),
                        render_flags=get_flag(set(html), 'HTML'))
-
-
