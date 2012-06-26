@@ -17,10 +17,10 @@ provided by `contrib.markup`.
 ## How to use?
 
 ```django
-    {% load marker %}
+{% load marker %}
 
-    {# Use one of available tags... #}
-    {% markdown your_text %}
+{# Use one of available tags... #}
+{% markdown your_text %}
 ```
 
 Additional documentation for:
