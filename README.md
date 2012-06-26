@@ -54,9 +54,9 @@ MARKER = {
 
 #### Why misaka?
 
-Misaka is fastest out of all tested Python libraries. Also it uses
-security-focused [sundown](http://blog.vmarti.net/sundown/) which makes it a
-good choice for most of your markdown needs.
+Misaka is fastest out of all tested Python libraries. Also it is using
+security-focused [sundown](http://blog.vmarti.net/sundown/) as backend which
+makes it a good choice for most of your markdown needs.
 
 ```
    Misaka: 0.07s
