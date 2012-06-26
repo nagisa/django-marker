@@ -45,7 +45,7 @@ variable in your `settings.py`.
 
 ```python
 MARKER = {
- `   'markdown': {
+    'markdown': {
         'global_exts': ['strikethrough', 'superscript'],
         'global_html': ['hard-wrap']
     }
