@@ -82,7 +82,6 @@ Markdown2: 12.42s
     of security, `safe` flag is supposed to provide in `contrib.markup` tag.
 
 2.  Some extensions present in python-markdown doesn't exist in sundown. Namely:
-
     * abbr
     * attr_list
     * codehilite – *you can achieve same results by using custom renderer.*
