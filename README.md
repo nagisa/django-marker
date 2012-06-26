@@ -1,5 +1,3 @@
-# django-marker
-
 ## Why?
 
 First of all, `contrib.markup`
@@ -14,7 +12,18 @@ when actual deprecation warning appears in release notes.
 Our primary goal is to provide template tags for same three markups that are
 provided by `contrib.markup`.
 
-## How to use?
+Tag syntax, however, is not backwards compatible. It was pretty hard to decide
+to drop compatibility for flexibility.
+
+## How to install/use/migrate?
+
+TODO: package module properly and upload it to PyPI.
+
+    pip install ??????
+
+---
+
+Add `marker` to `INSTALLED_APPS` in `settings.py`
 
 ```django
 {% load marker %}
@@ -23,7 +32,7 @@ provided by `contrib.markup`.
 {% markdown your_text %}
 ```
 
-Additional documentation for:
+Additional documentation and instructions for:
 
 * [markdown tag](#markdown)
 
@@ -66,3 +75,24 @@ cMarkdown: 0.11s
  Markdown: 6.87s
 Markdown2: 12.42s
 ```
+
+#### Migrating from contrib.markup markdown tag.
+
+1.  `skip-html` and `safelink` render flags should provide you with same ammount
+    of security, `safe` flag is supposed to provide in `contrib.markup` tag.
+
+2.  Some extensions present in python-markdown doesn't exist in sundown. Namely:
+
+    * abbr
+    * attr_list
+    * codehilite – *you can achieve same results by using custom renderer.*
+    * def_list
+    * footnotes
+    * meta
+    * rss – *wait, what?*
+    * wikilinks
+
+    You'll have to sacrifice functionality they provide for security and speed
+    gains.
+
+
