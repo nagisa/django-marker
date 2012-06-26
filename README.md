@@ -52,7 +52,7 @@ MARKER = {
 }
 ```
 
-#### Reasons for using misaka
+#### Why misaka?
 
 Misaka is fastest out of all tested Python libraries. Also it uses
 security-focused [sundown](http://blog.vmarti.net/sundown/) which makes it a
