@@ -5,8 +5,6 @@ markup syntaxes to HTML; currently there is support for:
     * Markdown, which requires the markdown2 library available at
       https://github.com/trentm/python-markdown
 """
-import re
-
 from django import template
 
 from settings import MARKER
