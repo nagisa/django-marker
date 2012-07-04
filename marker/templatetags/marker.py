@@ -31,7 +31,8 @@ def markdown(what, **kwargs):
        import misaka
     except ImportError:
         if MARKER['fatal_import']:
-            raise ImportError('Could not import misaka.')
+            raise ImportError('Error in \'markdown\' filter:' \
+                              ' Could not import misaka.')
         return what
 
     def get_flag(strs, prefix):
@@ -51,3 +52,5 @@ def markdown(what, **kwargs):
 
     return misaka.html(what, extensions=get_flag(set(exts), 'EXT'),
                        render_flags=get_flag(set(html), 'HTML'))
+
+
