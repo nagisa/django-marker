@@ -9,4 +9,5 @@ MARKER = {
         'global_html': _markdown.get('global_html', []),
         'global_exts': _markdown.get('global_exts', []),
     },
+    'restructuredtext': _marker.get('restructuredtext', {}),
 }
